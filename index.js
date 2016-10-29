@@ -203,7 +203,9 @@ function dispatcher (hooks) {
       assert.equal(typeof caller, 'string', 'barracks._send: caller should be a string')
       assert.equal(typeof cb, 'function', 'barracks._send: cb should be a function')
 
-      setTimeout(function () {
+      performAction()
+
+      function performAction () {
         var reducersCalled = false
         var effectsCalled = false
         const newState = xtend(_state)
@@ -247,7 +249,7 @@ function dispatcher (hooks) {
         if (!reducersCalled && !effectsCalled) {
           throw new Error('Could not find action ' + actionName)
         }
-      }, 0)
+      }
     }
   }
 }
